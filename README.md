@@ -1,2 +1,2 @@
 # ocr
-An optical character recognition system that predicts a character drawn on a web page using logistic regression.
+An optical character recognition system that predicts a character drawn on the web app using logistic regression.
