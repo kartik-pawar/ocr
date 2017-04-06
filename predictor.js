@@ -1,56 +1,42 @@
 function predict(){
+	reqPixels=scaling();
+
+}
+
+function scaling(){
 	var canvas=document.getElementsByTagName("canvas");
-	console.log(canvas);
-	var canvasctx=canvas[1].getContext("2d");
-	console.log(canvasctx);
+	var canvasContext=canvas[1].getContext("2d");
 
 	var cheight=canvas[1].clientHeight;
 	var cwidth=canvas[1].clientHeight;
-	var imgd=canvasctx.getImageData(0,0,cheight,cwidth);
-	console.log(imgd);
+	var drawingImageData=canvasContext.getImageData(0,0,cheight,cwidth);
 	
-	var pix=imgd.data;
-	console.log(pix);
-	var pixels=new Array();
+	var drawingImageDataPixels=drawingImageData.data;
+	//console.log(drawingImageDataPixels);
+	var reqPixels=new Array();
 	var offset=0,current,incrementFactor=cheight/28;
-	var of2=112*incrementFactor;
+	var offset2=112*incrementFactor;
 	for(i=0;i<28;i++){
-		offset=incrementFactor*i*of2;
+		offset=incrementFactor*i*offset2;
 		for(j=0	;j<28;j++){
 			current=offset+j*incrementFactor*4;
-			pixels.push(pix[current]);
-			console.log(current);
+			reqPixels.push(drawingImageDataPixels[current]);
+			//console.log(current+" "+drawingImageDataPixels[current]);
 		}
 	}
-		
+	return reqPixels;
+	/*	
+	var checkCanvas = document.getElementById("showimg");
+	var checkCanvasContext = checkCanvas.getContext("2d");
+	var checkImageData = checkCanvasContext.getImageData(0,0,28,28);
+	//console.log(checkImageData);
 
-	// canvasctx2=canvas[0].getContext("2d");
-	// var id = canvasctx2.createImageData(28,28); // only do this once per page
-	// var d  = id.data;                        // only do this once per page
-	// for(i=0;i<28;i++){
-	// 	for(j=0	;j<28;j++){
-	// 		index = (i + j * 28) * 4;
-	// 		d[index+0]=d[index+1]=d[index+2]=d[index+3]=pixels[i*28+j]  ;
-	//  	}
-
-	//  	canvasctx2.putImageData( id, i,j );
-	// }
-
-	var c = document.getElementById("showimg");
-	var ctx = c.getContext("2d");
-	var imgData = ctx.createImageData(100, 100);
-
-	var i;
-	for (i = 0; i < 28; i ++) {
-		for(j=0; j<28; j+=4){
-			imgData.data[i*28+j+0] = imgData.data[i*28+j+1] = imgData.data[i*28+j+2] = pixels[i*28+j];
-			console.log("value: "+pixels[i*28+j]+" index: "+(i*28+j) );
-	    	imgData.data[i+3] = 1;
-		}
-	    
+	for (i = 0; i < checkImageData.data.length; i+=4) {
+			checkImageData.data[i] = checkImageData.data[i+1] = checkImageData.data[i+2] = reqPixels[i/4];
+			checkImageData.data[i+3]=255;
+			console.log("value: "+checkImageData.data[i/4]+" index: "+(i/4) );	    
 	}
-
-	ctx.putImageData(imgData, 10, 10);
-
-	console.log(pixels);
+	console.log(checkImageData.data);
+	checkCanvasContext.putImageData(checkImageData, 0, 0);
+	*/
 }
