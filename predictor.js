@@ -43,7 +43,7 @@ function predict(){
 	var i;
 	for (i = 0; i < 28; i ++) {
 		for(j=0; j<28; j+=4){
-			imgData.data[i+0] = imgData.data[i+1] =	imgData.data[i+2] = pixels[i*28+j];
+			imgData.data[i*28+j+0] = imgData.data[i*28+j+1] = imgData.data[i*28+j+2] = pixels[i*28+j];
 			console.log("value: "+pixels[i*28+j]+" index: "+(i*28+j) );
 	    	imgData.data[i+3] = 1;
 		}
