@@ -1,9 +1,10 @@
 var oldX,oldY;
 function setup() {
 	createCanvas(280,280);
-	background(255);
-	strokeWeight(10);
-	strokeJoin(ROUND);
+	background(0);
+	stroke(255);
+	strokeWeight(20);
+	//strokeJoin(ROUND);
 }
 
 function draw() {
@@ -27,5 +28,6 @@ function mouseReleased(){
 
 function clearCanvas(){
 	clear();
+	background(0);
 	oldX=oldY=undefined;
 }
